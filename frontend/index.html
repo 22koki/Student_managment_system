@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10182b">
+  <meta name="description" content="NOVA Campus — a modern student experience command center.">
+  <title>NOVA Campus — Student Intelligence</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="brand-mark">✳</div><div><strong>NOVA<span>.</span></strong><small>CAMPUS OS</small></div></div>
+    <div class="workspace-pill"><div class="workspace-icon">◈</div><div><strong>Nova University</strong><small>Academic workspace</small></div><span class="chevron">⌄</span></div>
+    <div class="nav-section-label">WORKSPACE</div>
+    <nav aria-label="Main navigation">
+      <button class="nav-item active" data-view="overview"><span class="nav-icon">▦</span> Overview</button>
+      <button class="nav-item" data-view="students"><span class="nav-icon">♙</span> Students <span class="nav-count" id="navCount">0</span></button>
+      <button class="nav-item" data-view="insights"><span class="nav-icon">◫</span> Insights</button>
+      <button class="nav-item" data-view="activity"><span class="nav-icon">◷</span> Activity log</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-note"><span class="sparkle">✧</span><strong>Built for brighter futures.</strong><p>See the whole picture, celebrate every student.</p><span class="mini-pill">NOVA V1.0 ✨</span></div>
+      <div class="profile"><div class="avatar dark">AD</div><div><strong>Campus Administrator</strong><small>Demo workspace</small></div><span>•••</span></div>
+    </div>
+  </aside>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left"><button class="mobile-menu" id="menuBtn" aria-label="Toggle menu">☰</button><span class="breadcrumb">Workspace</span><span class="crumb-sep">/</span><strong id="breadcrumb">Overview</strong></div>
+      <div class="topbar-right"><span class="system-status"><i></i> System operational</span><button class="icon-button" id="refreshBtn" aria-label="Refresh data" title="Refresh data">↻</button><div class="avatar top-avatar">AD</div></div>
+    </header>
+    <main id="main">
+      <section class="page active" id="overviewPage">
+        <div class="page-heading"><div><div class="eyebrow"><span class="dot-glow"></span> STUDENT SUCCESS, REIMAGINED</div><h1>Good to see you <span class="wave">✳</span></h1><p>Here's what's happening across your campus today.</p></div><div class="heading-actions"><button class="btn secondary" data-action="export">↧ Export data</button><button class="btn primary" data-action="add"><span>＋</span> Add student</button></div></div>
+        <div class="hero"><div class="hero-decor hero-decor-one"></div><div class="hero-decor hero-decor-two"></div><div class="hero-text"><span class="hero-label">✦ THE BIG PICTURE</span><h2>Every student has<br>a story worth seeing.</h2><p>One beautiful space to manage records, spot opportunities, and help your learners thrive.</p><button class="hero-cta" data-action="students">Explore student directory <span>↗</span></button></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-outer"></div><div class="orbit orbit-inner"></div><div class="orbit-core">✳</div><span class="orbit-node node-one">✦</span><span class="orbit-node node-two">◈</span><span class="orbit-node node-three">●</span><span class="orbit-star star-one">✧</span><span class="orbit-star star-two">✦</span></div></div>
+        <div class="section-line"><div><span class="section-kicker">AT A GLANCE</span><h2>Campus pulse <span class="muted-light">↗</span></h2></div><span class="subtle" id="lastUpdated">Updated just now</span></div>
+        <div class="stats-grid" id="statsGrid"><div class="loading-card">Loading campus metrics…</div></div>
+        <div class="dashboard-grid">
+          <section class="panel large-panel"><div class="panel-head"><div><span class="section-kicker">GROWTH TRACKER</span><h3>Enrollment activity</h3><p>New additions over the last six months</p></div><span class="panel-tag">Last 6 months ⌄</span></div><div id="enrollmentChart" class="bar-chart" role="img" aria-label="Monthly enrollments"></div></section>
+          <section class="panel"><div class="panel-head"><div><span class="section-kicker">CAMPUS MIX</span><h3>Students by program</h3><p>Where our learners belong</p></div></div><div id="departmentChart"></div></section>
+        </div>
+        <div class="dashboard-grid bottom-panels">
+          <section class="panel"><div class="panel-head"><div><span class="section-kicker">EARLY SUPPORT</span><h3>Students to check in on</h3><p>A little attention goes a long way</p></div><button class="text-link" data-action="insights">All insights ↗</button></div><div id="riskPreview" class="risk-list"></div></section>
+          <section class="panel"><div class="panel-head"><div><span class="section-kicker">WHAT'S NEW</span><h3>Recent activity</h3><p>The latest changes in your workspace</p></div><button class="text-link" data-action="activity">View log ↗</button></div><div id="activityPreview" class="activity-list"></div></section>
+        </div>
+      </section>
+      <section class="page" id="studentsPage">
+        <div class="page-heading"><div><div class="eyebrow">YOUR CAMPUS COMMUNITY</div><h1>Student directory <span class="accent">✦</span></h1><p>Every student, one thoughtful place.</p></div><div class="heading-actions"><button class="btn secondary" data-action="export">↧ Export CSV</button><button class="btn primary" data-action="add">＋ Add student</button></div></div>
+        <div class="directory-banner"><div class="directory-icon">♙</div><div><strong>People, not just records.</strong><p>Search, organize, and keep every student profile up to date.</p></div><span id="directoryTotal">— students</span></div>
+        <section class="panel directory-panel"><div class="directory-tools"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search names, emails, student IDs…" aria-label="Search students"></label><select id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option>Active</option><option>On leave</option><option>Graduated</option><option>Suspended</option></select><select id="programFilter" aria-label="Filter by program"><option value="">All programs</option></select><select id="sortFilter" aria-label="Sort students"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="name">Name A–Z</option><option value="gpa">Highest GPA</option><option value="attendance">Lowest attendance</option></select></div>
+        <div class="table-scroll"><table class="student-table"><thead><tr><th>STUDENT</th><th>STUDENT ID</th><th>PROGRAM</th><th>YEAR</th><th>GPA</th><th>ATTENDANCE</th><th>STATUS</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody id="studentRows"></tbody></table></div>
+        <div class="table-footer"><span id="paginationLabel">Loading…</span><div class="pager"><button class="pager-btn" id="prevPage" aria-label="Previous page">←</button><span id="pageIndicator">1 / 1</span><button class="pager-btn" id="nextPage" aria-label="Next page">→</button></div></div>
+        </section>
+      </section>
+      <section class="page" id="insightsPage">
+        <div class="page-heading"><div><div class="eyebrow">FROM NUMBERS TO IMPACT</div><h1>Campus insights <span class="accent">✳</span></h1><p>A clearer view of student progress and wellbeing.</p></div><div class="heading-actions"><button class="btn primary" data-action="students">Browse directory ↗</button></div></div>
+        <div class="insights-top" id="insightStats"></div>
+        <div class="dashboard-grid"><section class="panel"><div class="panel-head"><div><span class="section-kicker">STUDENT STATUS</span><h3>Enrollment status</h3><p>Current breakdown of the student community</p></div></div><div id="statusDonut" class="donut-wrap"></div></section><section class="panel"><div class="panel-head"><div><span class="section-kicker">PROGRAM SPOTLIGHT</span><h3>Program distribution</h3><p>Participation across departments</p></div></div><div id="insightDepartments"></div></section></div>
+        <section class="panel insight-risk-panel"><div class="panel-head"><div><span class="section-kicker">OPPORTUNITIES TO SUPPORT</span><h3>Student wellbeing watchlist</h3><p>Active students below 2.0 GPA or 75% attendance — an indicator for outreach, not a diagnosis.</p></div></div><div id="riskFull" class="risk-list"></div></section>
+      </section>
+      <section class="page" id="activityPage"><div class="page-heading"><div><div class="eyebrow">ACCOUNTABILITY BUILT IN</div><h1>Activity timeline <span class="accent">◷</span></h1><p>A record of changes, from new enrollments to updated profiles.</p></div></div><section class="panel activity-page-panel"><div class="panel-head"><div><span class="section-kicker">WORKSPACE HISTORY</span><h3>All recent changes</h3></div><button class="btn secondary small" id="activityRefresh">↻ Refresh</button></div><div id="activityFull" class="activity-list"></div></section></section>
+    </main>
+    <footer class="footer"><span>✳ NOVA CAMPUS <span class="footer-muted">© <span id="yearText"></span> • Crafted with intention</span></span><span>Student management, beautifully simple.</span></footer>
+  </div>
+</div>
+<div class="overlay" id="modalOverlay" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-top"><div><span class="section-kicker" id="modalEyebrow">STUDENT RECORD</span><h2 id="modalTitle">Add a student</h2></div><button class="close-btn" id="closeModal" aria-label="Close dialog">×</button></div><div id="modalContent"></div></div></div>
+<div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
+<div class="mobile-shade" id="mobileShade"></div>
+</body>
+</html>
